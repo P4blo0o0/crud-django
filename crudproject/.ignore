@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environment
+myenv/
+
+# Django SQLite database
+db.sqlite3
+
+# Environment files
+*.env
+
+# Static files (optional, if you want to collectstatic separately)
+staticfiles/

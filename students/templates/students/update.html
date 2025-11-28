@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student - Student Management System</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Student Management System</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/create/"><i class="fas fa-user-plus"></i> Add Student</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Edit Student</h2>
+                <a href="/" class="btn btn-light">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+
+            <form method="POST" style="max-width: 600px;">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ student.name }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" name="age" id="age" class="form-control" value="{{ student.age }}" min="16" max="60" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="course" class="form-label">Course</label>
+                    <select name="course" id="course" class="form-control" required>
+                        <option value="Computer Science" {% if student.course == "Computer Science" %}selected{% endif %}>Computer Science</option>
+                        <option value="Business Administration" {% if student.course == "Business Administration" %}selected{% endif %}>Business Administration</option>
+                        <option value="Engineering" {% if student.course == "Engineering" %}selected{% endif %}>Engineering</option>
+                        <option value="Medicine" {% if student.course == "Medicine" %}selected{% endif %}>Medicine</option>
+                        <option value="Arts & Humanities" {% if student.course == "Arts & Humanities" %}selected{% endif %}>Arts & Humanities</option>
+                        <option value="Other" {% if student.course == "Other" %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ student.email|default:'' }}" placeholder="Enter student's email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" value="{{ student.phone|default:'' }}" placeholder="Enter student's phone number">
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-save"></i> Update Student
+                    </button>
+                    <a href="/" class="btn btn-light">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
